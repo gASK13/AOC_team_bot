@@ -7,9 +7,11 @@ import datetime
 USER_AGENT = os.environ['USER_AGENT']
 RETRY_PROTECTION = 1  # minute
 SNS_TOPIC = os.environ['SNS_TOPIC']
+BOARD_URL = os.environ['BOARD_URL']
+
 
 def load_current_data():
-    request = urllib.request.Request("https://adventofcode.com/2023/leaderboard/private/view/16961.json")
+    request = urllib.request.Request(BOARD_URL)
     request.add_header('User-Agent', USER_AGENT)
     request.add_header('Cookie', f'session={os.environ["AOC_SESSION"]}')
     return json.loads(urllib.request.urlopen(request).read())
@@ -37,7 +39,7 @@ def find_best(data):
     return sorted([data['members'][member]['name'] for member in data['members'] if data['members'][member]['local_score'] == _max]), _max
 
 
-def site_notification(message):
+def send_notification(message):
     boto3.client('sns', region_name='us-east-1').publish(
         TopicArn=SNS_TOPIC,
         Message=message,
@@ -109,7 +111,7 @@ def lambda_handler(event, context):
 
         # print it first
         for info in new_info:
-            print(info['message'])
+            send_notification(info['message'])
 
         print(f'Saving check from now - {int(datetime.datetime.now().timestamp())}')
         table.put_item(
