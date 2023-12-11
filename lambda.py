@@ -95,6 +95,8 @@ def lambda_handler(event, context):
                         # compare part 1 and part 2
                         if day not in old_data['members'][member]['completion_day_level']:
                             new_info.append(format_message(day, member, new_data))
+                            if '2' in new_data['members'][member]['completion_day_level'][day]:
+                                new_info.append(format_message(day, member, new_data, day_part='2'))
                         elif '2' in new_data['members'][member]['completion_day_level'][day] and '2' not in \
                                 old_data['members'][member]['completion_day_level'][day]:
                             new_info.append(format_message(day, member, new_data, day_part='2'))
@@ -112,6 +114,7 @@ def lambda_handler(event, context):
         # print it first
         for info in new_info:
             send_notification(info['message'])
+            print(info['message'])
 
         print(f'Saving check from now - {int(datetime.datetime.now().timestamp())}')
         table.put_item(
