@@ -8,6 +8,7 @@ USER_AGENT = os.environ['USER_AGENT']
 RETRY_PROTECTION = 1  # minute
 SNS_TOPIC = os.environ['SNS_TOPIC']
 BOARD_URL = os.environ['BOARD_URL']
+SECURITY_KEY = os.environ['SECURITY_KEY']
 
 
 def load_current_data():
@@ -49,6 +50,10 @@ def send_notification(message):
 
 
 def lambda_handler(event, context):
+    if 'queryStringParameters' not in event or 'key' not in event['queryStringParameters'] or event['queryStringParameters']['key'] != SECURITY_KEY:
+        return { 
+            'statusCode' : 401
+        }
     # AWS Resource and Client
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     table = dynamodb.Table('aoc')
