@@ -1,2 +1,27 @@
-# AOC_team_bot
-Simple bot for out group using Lambda, SNS, DynamoDB, Cloudwatch.
+# AOC Team Bot
+
+## Overview
+Simple bot to notify our group of any solved puzzles that can be triggered by our library.
+
+Built using AWS technologies.
+
+## Disclaimer
+This script/repo/tool does follow the automation guidelines on the /r/adventofcode community wiki (and link to this article that you're currently reading right now [https://www.reddit.com/r/adventofcode/wiki/faqs/automation] somewhere). Specifically:
+
+Automated outbound calls are throttled to happen every 30 minutes (using Cloudwatch timer).
+
+Triggers by our library are limited to once per minute in case of error, but do only happen when someone solves a puzzle.
+
+The User-Agent header in userAgentHeaderFunction() is set to me since I maintain this tool.
+
+In case of any issues with throttling, do not hesitate to contact me.
+
+## How to setup
+Built during a train ride using AWS tools.
+
+Namely:
+- CloudWatch to trigger every 30 minutes
+- Lambda to poll API and compare with version stored locally in DynamoDB
+- SNS to send notification via email to the group
+
+If you want to reuse it, just replace the URL with your board and configure the environment variables (SNS_TOPIC, AOC_SESSION and USER_AGENT).
