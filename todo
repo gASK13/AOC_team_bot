@@ -1,0 +1,4 @@
+- fix CI/CD pipeline
+- add tests (with mockup data to avoid polling the API and DynamoDB)
+- make templates via string and loads / dumps
+- better code structure and loading of data (I mean...come on)
