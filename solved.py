@@ -37,7 +37,7 @@ def generate_solved_message(data):
                                         {
                                             "type": "TextBlock",
                                             "id": "9b935c5b-7e6d-8718-f70d-b7a111f461f4",
-                                            "text": "{data['username']} právě vyřešil data['day']. den, {'první' if data['part'] == 1 else 'druhou'} část!",
+                                            "text": f"{data['username']} právě vyřešil data['day']. den, {'první' if data['part'] == 1 else 'druhou'} část!",
                                             "wrap": True,
                                             "weight": "Bolder"
                                         },

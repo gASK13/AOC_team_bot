@@ -52,7 +52,7 @@ def generate_message(year, day, member, new_data, day_part='1'):
         after, after_time = earlier[-1]
         after_time = when - after_time
         # convert to human readable time in czech
-        after_time //= 60000 # to minutes
+        after_time //= 60 # to minutes
         if after_time < 60:
             after_time = f"{after_time} minut"
         elif after_time < 1440:
@@ -86,14 +86,14 @@ def find_best(data):
     # find member in data with highest local_score
     if len(data['members']) == 0:
         return [], 0
-    _max = sorted(list(set([data['members'][member]['local_score'] for member in data['members']])))[:-1]
+    _max = sorted(list(set([data['members'][member]['local_score'] for member in data['members']])))[-1]
     return ', '.join(sorted([data['members'][member]['name'] for member in data['members'] if data['members'][member]['local_score'] == _max])), _max
 
 def find_second_best(data):
     # find member in data with highest local_score
     if len(data['members']) == 0:
         return [], 0
-    _max = sorted(list(set([data['members'][member]['local_score'] for member in data['members']])))[:-2]
+    _max = sorted(list(set([data['members'][member]['local_score'] for member in data['members']])))[-2]
     return ','.join(sorted([data['members'][member]['name'] for member in data['members'] if data['members'][member]['local_score'] == _max])), _max
 
 
