@@ -75,7 +75,7 @@ def generate_message(year, day, member, new_data, day_part='1'):
                 'when': when_iso.isoformat(),
                 'order': order,
                 'after': f"To je {after_time} po {after}." if after is not None else "",
-                'score': new_data['member'][member]['local_score'],
+                'score': new_data['members'][member]['local_score'],
                 'place': place
             },
             'message': f"{new_data['members'][member]['name']} vyřešil {'první' if day_part == '1' else 'druhou'} část dne {day} jako {order}. - dobrá práce!"}
