@@ -23,5 +23,10 @@ Namely:
 - CloudWatch to trigger every 30 minutes
 - Lambda to poll API and compare with version stored locally in DynamoDB
 - SNS to send notification via email to the group
+- Teams webhook to send cards to teams (yay!)
 
 If you want to reuse it, just replace the URL with your board and configure the environment variables (SNS_TOPIC, AOC_SESSION and USER_AGENT).
+
+Alternatively use the deploy pipeline to deploy it to your AWS account (just set the secrets properly).
+
+However, it is not really drag and drop, it is mostly made for us, so best use it to take inspiration and make your own, more awesome bot! You can do it!
