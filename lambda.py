@@ -39,7 +39,7 @@ def generate_message(year, day, member, new_data, day_part='1'):
     earlier = []
     place = 1
     for other in new_data['members']:
-        if new_data['members'][other]['local_score'] > new_data['member'][member]['local_score']:
+        if new_data['members'][other]['local_score'] > new_data['members'][member]['local_score']:
             place += 1
         if day in new_data['members'][other]['completion_day_level']:
             if day_part in new_data['members'][other]['completion_day_level'][day]:
