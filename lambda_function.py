@@ -75,7 +75,7 @@ def generate_message(year, day, member, new_data, day_part='1'):
                 'part': day_part,
                 'when': when_iso.isoformat(),
                 'order': order,
-                'after': f"To je {after_time} po {after}." if after is not None else "",
+                'after': f"To je {after_time} po {new_data['members'][after]['name']}." if after is not None else "",
                 'score': new_data['members'][member]['local_score'],
                 'place': place
             },
