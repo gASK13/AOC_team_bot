@@ -23,8 +23,7 @@ def generate_solved_message(data):
                                             "type": "Image",
                                             "id": "6d86683b-8671-317b-0785-175b5619a4b3",
                                             "url": f"{data['image']}",
-                                            "altText": "",
-                                            "size": "Large"
+                                            "altText": ""
                                         }
                                     ]
                                 },
