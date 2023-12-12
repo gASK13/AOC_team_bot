@@ -38,20 +38,20 @@ def generate_solved_message(data):
                                             "type": "TextBlock",
                                             "id": "9b935c5b-7e6d-8718-f70d-b7a111f461f4",
                                             "text": "{data['username']} právě vyřešil data['day']. den, {'první' if data['part'] == 1 else 'druhou'} část!",
-                                            "wrap": true,
+                                            "wrap": True,
                                             "weight": "Bolder"
                                         },
                                         {
                                             "type": "TextBlock",
                                             "id": "09408bf2-6a2a-6a36-4720-45e24efde4bf",
                                             "text": f"Podařilo se mu to jako {data['order']}., přesně v {data['when']}",
-                                            "wrap": true
+                                            "wrap": True
                                         },
                                         {
                                             "type": "TextBlock",
                                             "id": "075c5afe-930d-5434-d4a6-465c09287c7e",
                                             "text": f"{data['after']}Jeho nové skóre je teď {data['score']} a je na {data['place']}. místě.",
-                                            "wrap": true
+                                            "wrap": True
                                         },
                                         {
                                             "type": "ActionSet",
