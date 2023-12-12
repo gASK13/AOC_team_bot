@@ -48,7 +48,8 @@ def generate_message(year, day, member, new_data, day_part='1'):
                     earlier.append((other, new_data['members'][other]['completion_day_level'][day][day_part]['get_star_ts']))
 
     if len(earlier) > 0:
-        after, after_time = earlier.sort(key=lambda x: x[1])[1]
+        earlier.sort(key=lambda x: x[1])
+        after, after_time = earlier[-1]
         after_time = when - after_time
         # convert to human readable time in czech
         after_time //= 60000 # to minutes
@@ -64,7 +65,7 @@ def generate_message(year, day, member, new_data, day_part='1'):
     when_iso += datetime.timedelta(hours=1)
 
     return {'time': new_data['members'][member]['completion_day_level'][day][day_part]['get_star_ts'],
-            'template': generate_champion_message,
+            'template': generate_solved_message,
             'data': {
                 'image': get_image(order),
                 'url' : BOARD_URL,
@@ -199,7 +200,7 @@ def generate_leader_message(new_best, new_data):
     # data >> leader, old_leader, leader_points, second, second_points
     second = find_second_best(new_data)
     return {'time': 999999999999999,
-            'template': generate_solved_message,
+            'template': generate_champion_message,
             'data': {
                 'url': BOARD_URL,
                 'leader': new_best[0],
