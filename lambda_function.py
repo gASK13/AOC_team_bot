@@ -170,7 +170,7 @@ def lambda_handler(event, context):
         # - leader change !!!
         old_best = find_best(old_data)
         new_best = find_best(new_data)
-        if old_best != new_best:
+        if old_best[0] != new_best[0]:
             new_info.append(generate_leader_message(new_best,new_data))
 
         # sort new_info by time
