@@ -118,7 +118,7 @@ def lambda_handler(event, context):
 
     # Get the data for current year (rollover in summer)
     year = int(datetime.datetime.now().year)
-    if int(datetime.datetime.now().month) < 12:
+    if int(datetime.datetime.now().month) < 11:
         year -= 1
 
     # get item for year = 2023 from dynamodb
