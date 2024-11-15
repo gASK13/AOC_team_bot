@@ -91,7 +91,7 @@ def find_best(data):
 
 def find_second_best(data):
     # find member in data with highest local_score
-    if len(data['members']) == 0:
+    if len(data['members']) < 2:
         return [], 0
     _max = sorted(list(set([data['members'][member]['local_score'] for member in data['members']])))[-2]
     return ','.join(sorted([data['members'][member]['name'] for member in data['members'] if data['members'][member]['local_score'] == _max])), _max
