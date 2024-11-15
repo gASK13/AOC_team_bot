@@ -82,20 +82,15 @@ def generate_message(year, day, member, new_data, day_part='1'):
             'message': f"{new_data['members'][member]['name']} vyřešil {'první' if day_part == '1' else 'druhou'} část dne {day} jako {order}. - dobrá práce!"}
 
 
-def find_best(data):
+def find_xth_best(data, x=1):
     # find member in data with highest local_score
     if len(data['members']) == 0:
         return [], 0
-    _max = sorted(list(set([data['members'][member]['local_score'] for member in data['members']])))[-1]
-    return ', '.join(sorted([data['members'][member]['name'] for member in data['members'] if data['members'][member]['local_score'] == _max])), _max
-
-def find_second_best(data):
-    # find member in data with highest local_score
-    if len(data['members']) < 2:
+    sortedList = sorted(list(set([data['members'][member]['local_score'] for member in data['members']])))
+    if len(sortedList) < x:
         return [], 0
-    _max = sorted(list(set([data['members'][member]['local_score'] for member in data['members']])))[-2]
-    return ','.join(sorted([data['members'][member]['name'] for member in data['members'] if data['members'][member]['local_score'] == _max])), _max
-
+    _max = sortedList[-x]
+    return ', '.join(sorted([data['members'][member]['name'] for member in data['members'] if data['members'][member]['local_score'] == _max])), _max
 
 def send_notification(info):
     # SNS sending
@@ -168,8 +163,8 @@ def lambda_handler(event, context):
                             new_info.append(generate_message(year, day, member, new_data, day_part='2'))
 
         # - leader change !!!
-        old_best = find_best(old_data)
-        new_best = find_best(new_data)
+        old_best = find_xth_best(old_data)
+        new_best = find_xth_best(new_data)
         if old_best[0] != new_best[0]:
             new_info.append(generate_leader_message(new_best,new_data))
 
@@ -198,7 +193,7 @@ def lambda_handler(event, context):
 
 def generate_leader_message(new_best, new_data):
     # data >> leader, old_leader, leader_points, second, second_points
-    second = find_second_best(new_data)
+    second = find_xth_best(new_data, 2)
     return {'time': 999999999999999,
             'template': generate_champion_message,
             'data': {
